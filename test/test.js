@@ -56,7 +56,6 @@ describe('Backend Services', (done) => {
           }
           res.should.have.status(200)
           res.body.should.be.a('object')
-          console.log(res.body)
           done()
         })
     })
