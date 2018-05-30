@@ -60,4 +60,22 @@ describe('Backend Services', (done) => {
         })
     })
   })
+  describe('Resize Image Service', (done) => {
+    it('the post request will return the image with dimension of 50*50', (done) => {
+      let jsonSend = {
+        'token': token,
+        'img': 'https://ichef.bbci.co.uk/news/660/cpsprodpb/37B5/production/_89716241_thinkstockphotos-523060154.jpg'
+      }
+      chai.request('127.0.0.1:3000')
+        .post('/resize')
+        .send(jsonSend)
+        .end((err, res) => {
+          if (err) {
+            done(err)
+          }
+          res.should.have.status(200)
+          done()
+        })
+    })
+  })
 })

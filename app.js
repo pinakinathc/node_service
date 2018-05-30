@@ -1,3 +1,5 @@
+// This is the main script which is accepts various POST requests
+
 'use strict'
 
 var createError = require('http-errors')
@@ -31,11 +33,30 @@ app.options('*', function (req, res) {
 })
 
 app.post('/login', (req, res) => {
+  /*
+  The structure of the POST can be anything but a good one is:
+  {
+    "username": "test_username",
+    "password": "test_password",
+  }
+  RESULT:
+  { "token": "a long token" }
+  */
   var token = jwt.sign(req.body, 'private_key', {expiresIn: 60 * 60})
   res.json({'token': token})
 })
 
 app.post('/patch', function (req, res) {
+  /*
+  The required POST request structure should be:
+  {
+    'token': 'token send by service during authentication',
+    'mydoc': 'initial JSON object',
+    'thepatch': 'JSON patch',
+  }
+  RETURNS:
+  { "output": "resultant JSON after applying the PATHC" }
+  */
   try {
     jwt.verify(req.body.token, 'private_key')
     let mydoc = req.body.mydoc
@@ -49,6 +70,15 @@ app.post('/patch', function (req, res) {
 })
 
 app.post('/resize', function (req, res) {
+  /*
+  The required POST request structure should be:
+  {
+    'token': 'token send by service during authentication',
+    'img': 'url of an image which needs to be resized',
+  }
+  RETURN:
+  <img src='the image with dimension 50*50'>
+  */
   try { jwt.verify(req.body.token, 'private_key') } catch (err) { res.send('Failed to verify token.') }
   jimp.read(req.body.img, function (err, img) {
     if (err) throw err
