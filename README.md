@@ -3,11 +3,11 @@ Node Service
 
 This is a Backend Service written in Node along with the use of some other packages like the following:
 
-* Mocha
-* Chai and Chai-hhtp
-* Standard
-* JsonPatch
-* JsonWebToken
+* [![Mocha](https://cldup.com/xFVFxOioAU.svg)]
+* [![Chai and Chai-hhtp](http://chaijs.com/img/chai-logo.png)]
+* [![Standard](https://cdn.rawgit.com/standard/standard/master/sticker.svg)]
+* |JsonPatch|
+* |JsonWebToken|
 
 
 Dependencies
